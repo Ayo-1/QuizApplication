@@ -13,6 +13,7 @@ app.use(bodyparser.urlencoded({extended: false}))
 require('dotenv').config();
 
 const PORT = process.env.PORT || 4000
+app.use(express.static(path.join(__dirname, `/../../${__dirname}`, 'build')));
 app.use('/', router)
 
 app.use('/questions', questions)

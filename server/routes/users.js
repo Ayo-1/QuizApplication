@@ -28,7 +28,7 @@ console.log(req.body.password)
 			if(resp){
 				const passwd = bcrypt.compareSync(req.body.password, resp.password)
 				if(passwd){
-					const token = jwt.sign({id: resp.id}, process.env.SECRET_key)
+					const token = jwt.sign({id: resp.id}, secretKey)
 				res.status(200).json({auth: true, token: token})
 					}
 				else if(!passwd){
@@ -70,7 +70,7 @@ if(!token){
 	res.status(401).json({auth: false, message: "No token provided"})
 }
 else{
-jwt.verify(token, process.env.SECRET_key, (err, decoded) => {
+jwt.verify(token, secretKey, (err, decoded) => {
 	if(err){
 		res.status(500).json(err)
 	}else{
@@ -109,7 +109,7 @@ if(!token){
 	res.status(401).json({auth: false, message: "No token Provided"})
 }
 else if(token){
-	jwt.verify(token, process.env.SECRET_key, (err, decoded) => {
+	jwt.verify(token, secretKey, (err, decoded) => {
 		if(!err){
 			user.scope('withoutPassword').findOne({
 							where: {id: decoded.id}, 
@@ -143,7 +143,7 @@ if(!token){
 	res.status(401).json({auth: false, token: null, message: "No token provided"})
 }
 else if(token){
-	jwt.verify(token, process.env.SECRET_key, (err, decoded) => {
+	jwt.verify(token, secretKey, (err, decoded) => {
 		if(err){
 			res.status(500).json({auth: false, message: "Failed to authenticate user token"})
 		}
@@ -166,7 +166,7 @@ if(!token){
 	res.status(401).json({auth: false, token: null, message: "No token provided"})
 }
 else if(token){
-	jwt.verify(token, process.env.SECRET_key, (err, decoded) => {
+	jwt.verify(token, secretKey, (err, decoded) => {
 		if(err){
 			res.status(500).json({auth: false, message: "Failed to authenticate user token"})
 		}
@@ -189,7 +189,7 @@ if(!token){
 	res.status(401).json({auth: false, token: null, message: "No token provided"})
 }
 else if(token){
-	jwt.verify(token, process.env.SECRET_key, (err, decoded) => {
+	jwt.verify(token, secretKey, (err, decoded) => {
 		if(err){
 			res.status(500).json({auth: false, message: "Failed to authenticate user token"})
 		}
@@ -211,7 +211,7 @@ if(!token){
 	res.status(401).json({auth: false, token: null, message: "No token provided"})
 }
 else if(token){
-	jwt.verify(token, process.env.SECRET_key, (err, decoded) => {
+	jwt.verify(token, secretKey, (err, decoded) => {
 		if(err){
 			res.status(500).json({auth: false, message: "Failed to authenticate user token"})
 		}
@@ -234,7 +234,7 @@ if(!token){
 	res.status(401).json({auth: false, token: null, message: "No token provided"})
 }
 else if(token){
-	jwt.verify(token, process.env.SECRET_key, (err, decoded) => {
+	jwt.verify(token, secretKey, (err, decoded) => {
 		if(err){
 			res.status(500).json({auth: false, message: "Failed to authenticate user token"})
 		}
